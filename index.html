@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Elegí la remera del cole</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f3f4f6;
+      --text: #111827;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 900px;
+      padding: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.7rem;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .row-2 {
+      display: flex;
+      gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+      .row-2 {
+        flex-direction: column;
+      }
+    }
+
+    .help-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 0.85rem;
+    }
+
+    .help-links button,
+    .help-links a {
+      border: none;
+      background: transparent;
+      color: var(--primary);
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.85rem;
+    }
+
+    .size-preview {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+
+    .size-preview h2 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .size-image {
+      width: 100%;
+      border-radius: 12px;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 180px;
+    }
+
+    .size-image img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .size-caption {
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    button.primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    button.primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    button.primary:active {
+      transform: translateY(0);
+    }
+
+    .disclaimer {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    details {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      background: #eff6ff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      border: 1px solid #bfdbfe;
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1d4ed8;
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin: 6px 0 0;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <!-- Columna izquierda: formulario -->
+      <div>
+        <h1>Elegí la remera del cole</h1>
+        <p class="subtitle">
+          Completá los datos del nene o la nena y te ayudamos a elegir el talle correcto.
+        </p>
+
+        <form id="remForm">
+          <div class="row-2">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Ej: Sofía" required>
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" name="apellido" type="text" placeholder="Ej: Pérez" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="celular">Celular de contacto</label>
+            <input id="celular" name="celular" type="tel" placeholder="Ej: 11 1234 5678" required>
+          </div>
+
+          <div class="field">
+            <label for="talle">Talle de remera</label>
+            <select id="talle" name="talle" required>
+              <option value="" disabled selected>Seleccioná un talle…</option>
+              <option value="4">Talle 4</option>
+              <option value="6">Talle 6</option>
+              <option value="8">Talle 8</option>
+              <option value="10">Talle 10</option>
+              <option value="12">Talle 12</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+
+            <div class="help-links">
+              <button type="button" onclick="document.getElementById('info-talles').open = !document.getElementById('info-talles').open;">
+                Más info sobre talles
+              </button>
+
+              <!-- Cambiá VIDEO_ID por el ID real del video -->
+              <a href="https://www.youtube.com/watch?v=Rljz1jXLsaY" target="_blank" rel="noopener">
+                Ver video: cómo tomar las medidas
+              </a>
+            </div>
+
+            <details id="info-talles">
+              <summary>¿No estás seguro del talle?</summary>
+              <p>
+                Medí una remera que le quede cómoda: ancho de axila a axila y largo desde el hombro
+                hasta abajo. Compará esas medidas con la imagen del talle que selecciones arriba.
+              </p>
+            </details>
+          </div>
+
+          <button class="primary" type="submit">Confirmar</button>
+          <p class="disclaimer">
+            *Este paso no realiza la compra, solo nos ayuda a registrar correctamente el talle.
+          </p>
+        </form>
+      </div>
+
+      <!-- Columna derecha: vista previa de talle -->
+      <aside class="size-preview">
+        <h2>Medidas del talle seleccionado</h2>
+        <div class="size-image" id="sizeImageContainer">
+          <span id="noSizeText">Elegí un talle para ver la imagen con las medidas.</span>
+          <img id="sizeImage" src="" alt="" style="display:none;">
+        </div>
+        <p class="size-caption" id="sizeCaption">
+          Acá vas a ver una imagen con el ancho y el largo de la remera para cada talle.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // Configurá acá la relación talle → imagen + descripción
+    const sizeData = {
+      "4":  { img: "img/talles/talle-4.png",  desc: "Talle 4: pensado para nivel inicial / primer ciclo." },
+      "6":  { img: "img/talles/talle-6.png",  desc: "Talle 6: ideal para chicos/as de aprox. 6–7 años." },
+      "8":  { img: "img/talles/talle-8.png",  desc: "Talle 8: referencia para 8–9 años según contextura." },
+      "10": { img: "img/talles/talle-10.png", desc: "Talle 10: suele usarse en 4.º / 5.º grado." },
+      "12": { img: "img/talles/talle-12.png", desc: "Talle 12: orientado a preadolescentes." },
+      "S":  { img: "img/talles/talle-S.png",  desc: "Talle S: equivalente a un pequeño de adulto." },
+      "M":  { img: "img/talles/talle-M.png",  desc: "Talle M: adulto medio." },
+      "L":  { img: "img/talles/talle-L.png",  desc: "Talle L: adulto grande." },
+      "XL": { img: "img/talles/talle-XL.png", desc: "Talle XL: adulto extra grande." }
+    };
+
+    const selectTalle = document.getElementById('talle');
+    const imgEl = document.getElementById('sizeImage');
+    const noSizeText = document.getElementById('noSizeText');
+    const captionEl = document.getElementById('sizeCaption');
+
+    selectTalle.addEventListener('change', () => {
+      const value = selectTalle.value;
+      const data = sizeData[value];
+
+      if (data) {
+        imgEl.src = data.img;
+        imgEl.alt = "Medidas de la remera – talle " + value;
+        imgEl.style.display = "block";
+        if (noSizeText) noSizeText.style.display = "none";
+        captionEl.textContent = data.desc;
+      }
+    });
+
+    // Envío a Google Apps Script (Google Sheets)
+    document.getElementById('remForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nombre   = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const celular  = document.getElementById('celular').value.trim();
+      const talle    = document.getElementById('talle').value;
+
+      if (!talle) {
+        alert("Seleccioná un talle antes de confirmar.");
+        return;
+      }
+
+      const data = { nombre, apellido, celular, talle };
+
+      try {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbxhFz8qUiD_IjhJwFBPKvIKUyGRzoyyuf6jlWq1fhs72fm8zMzsBaLQKkK0tDA_jhfc1A/exec", {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          alert("¡Datos registrados correctamente! Muchas gracias 😊");
+          e.target.reset();
+          if (noSizeText) noSizeText.style.display = "block";
+          imgEl.style.display = "none";
+          captionEl.textContent = "Acá vas a ver una imagen con el ancho y el largo de la remera para cada talle.";
+        } else {
+          alert("Hubo un error al guardar los datos. Probá de nuevo más tarde.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("No se pudo conectar con el servidor. Revisá la conexión o intentá más tarde.");
+      }
+    });
+  </script>
+</body>
+</html>
